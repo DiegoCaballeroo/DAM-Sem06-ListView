@@ -1,6 +1,9 @@
 package com.example.damsem06_listview;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -13,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView lista;
     List<String> estudiantes;
     @Override
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        setTitle("Lista de Estudiantes");
         lista = findViewById(R.id.listView);
         estudiantes = new ArrayList<>();
         estudiantes.add("Caballero");
@@ -34,5 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 estudiantes
         );
         lista.setAdapter(adaptadorEstudiantes);
+        lista.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String nombreEstudiante = estudiantes.get(position);
+        Log.i("DAM","Estudiante Seleccionado:" + nombreEstudiante);
     }
 }
